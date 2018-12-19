@@ -13,7 +13,7 @@ void update_MacroVar();
 
 void update_Source();
 
-void update_xEq(Point point,double hEq[],double hS[],double fEq[],double fS[]);
+void update_xEq(Point point,DDF_EqS xEqxS);
 
 //------------------------Output.h---------------------------
 
@@ -90,7 +90,19 @@ void update_xBarPlus()
 		double hEq[Q] = {0.0}, hS[Q] = {0.0};
 		double fEq[Q] = {0.0}, fS[Q] = {0.0};
 
-		update_xEq(point,hEq,hS,fEq,fS);
+		DDF_EqS xEqxS;
+
+		#ifdef _ARK_ALLENCAHN_FLIP
+		xEqxS.hEq = hEq;
+		xEqxS.hS = hS;
+		#endif
+
+		#ifdef _ARK_MOMENTUM_FLIP
+		xEqxS.fEq = fEq;
+		xEqxS.fS = fS;
+		#endif
+		
+		update_xEq(point,xEqxS);
 		//update \bar{h}^{+}(x,xi,t)
 		#ifdef _ARK_ALLENCAHN_FLIP
 		double 

@@ -61,7 +61,7 @@ ConvergenceInterval = 1000, //SumRho,SumT,independent
 
 ResidualInterval = 1000, //print to screen
 
-writeFileInterval = 10000; //always >= ResidualControl
+writeFileInterval = 1000; //always >= ResidualControl
 
 const double 
 

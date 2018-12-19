@@ -135,7 +135,7 @@ void update_Source()
 		prev_phiv[] = phi[]*v[];
 	}
 }
-void update_xEq(Point point,double hEq[],double hS[],double fEq[],double fS[])
+void update_xEq(Point point,DDF_EqS xEqxS)
 {
 	double u1,GAMMA;
 	double uu = u[]*u[] + v[]*v[];
@@ -146,13 +146,13 @@ void update_xEq(Point point,double hEq[],double hS[],double fEq[],double fS[])
 		GAMMA = u1 + 0.5*u1*u1 - uu*Lambda0;
 		//
 		#ifdef _ARK_ALLENCAHN_FLIP
-		hEq[k] = omega[k]*(1.0 + u1)*phi[];
-		hS[k]  = omega[k]*(xi_u[k]*GradX_phi[] + xi_v[k]*GradY_phi[]);
+		xEqxS.hEq[k] = omega[k]*(1.0 + u1)*phi[];
+		xEqxS.hS[k]  = omega[k]*(xi_u[k]*GradX_phi[] + xi_v[k]*GradY_phi[]);
 		#endif
 
 		#ifdef _ARK_MOMENTUM_FLIP
-		fEq[k] = omega[k]*(p[]/RT + rho[]*GAMMA) - (int)(!k)*p[]/RT;
-		fS[k]  = omega[k]*
+		xEqxS.fEq[k] = omega[k]*(p[]/RT + rho[]*GAMMA) - (int)(!k)*p[]/RT;
+		xEqxS.fS[k]  = omega[k]*
 		(
 			(1+GAMMA)*((xi_u[k]-u[])*ForceX[] + (xi_v[k]-v[])*ForceY[])/RT
 			+

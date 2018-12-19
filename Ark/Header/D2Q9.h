@@ -18,6 +18,23 @@ typedef struct{
   double y;
 } DmQn;
 
+typedef struct{
+	#ifdef _ARK_ALLENCAHN_FLIP
+	double *hEq;
+	double *hS;
+	#endif
+
+	#ifdef _ARK_MOMENTUM_FLIP
+	double *fEq;
+	double *fS;
+	#endif
+
+	#ifdef _ARK_ENERGY_FLIP
+	double *gEq;
+	double *gS;
+	#endif
+} DDF_EqS;
+
 extern double const xi_u[Q];
 
 extern double const xi_v[Q];
